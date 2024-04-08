@@ -1,0 +1,16 @@
+{
+  "name": "myspace-api",
+  "version": "1.0.0",
+  "description": "Myspace app qui permets de faire une inscription des utilisateurs qui vont être  stocker dans une base de données Sqlite(nom , prenom , login , password)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
