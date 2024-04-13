@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const utilisateurRouter= require('./routers/utilisateurRoute');
 const MessageRoute= require('./routers/MessageRoute');
+require('dotenv').config()
 
 // instatiation de l app
 const app = express();
@@ -15,5 +16,5 @@ app.use('/messages', MessageRoute)
 
 
 
-app.listen(3000);
-console.log("Server started on port 3000");
+app.listen(process.env.PORT || 3000 );
+console.log("Server started on port "+ process.env.PORT  || 3000);
