@@ -12,13 +12,19 @@ exports.getById= (req,res)=>{
 }
 
 exports.create= (req,res)=>{
-    const user= req.body;
-    if( userService.notExist(user.login)){
+    const {firstname, lastname,login,password}= req.body;
+    if( firstname ===undefined ||   lastname ===undefined || login ===undefined || password ===undefined){
+        res.status(400).json({"message": "body not match contract "});
+    }else{
+        
+    if( userService.notExist(login)){
+        const user ={firstname, lastname,login,password}
         const data = userService.create(user);
         res.status(201).json(data);
     }else{
         res.status(400).json({"message": "user already exist with same login"});
     }
+}
     
     
 }
