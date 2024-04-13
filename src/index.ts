@@ -1,7 +1,7 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const utilisateurRouter= require('./routers/utilisateurRoute');
-const MessageRoute= require('./routers/MessageRoute');
+ 
+import express  from 'express';
+import bodyParser  from 'body-parser'; 
+import router from './routers/utilisateurRoute' ;
 require('dotenv').config()
 
 // instatiation de l app
@@ -11,8 +11,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //brancher mes routes 
-app.use('/utilisateurs', utilisateurRouter)
-app.use('/messages', MessageRoute)
+app.use('/utilisateurs', router)
+ 
 
 
 
