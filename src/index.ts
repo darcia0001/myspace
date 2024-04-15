@@ -1,7 +1,7 @@
+import { UserRoutes } from './routers/utilisateurRoute';
  
 import express  from 'express';
 import bodyParser  from 'body-parser'; 
-import router from './routers/utilisateurRoute' ;
 require('dotenv').config()
 
 // instatiation de l app
@@ -10,10 +10,13 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+const userRoutes= new UserRoutes()
 //brancher mes routes 
-app.use('/utilisateurs', router)
+app.use('/utilisateurs', userRoutes.router)
  
-
+if(false){
+    console.log("hello")
+}
 
 
 
