@@ -14,6 +14,7 @@ export class Database {
                 })
         }
         private createTable(){
+                // mignations 
                 this.db.run(`create table if not exists
                 users (id integer PRIMARY KEY AUTOINCREMENT ,
                         firstname TEXT,
