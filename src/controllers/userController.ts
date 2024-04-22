@@ -58,7 +58,7 @@ export class UserController {
 
   async update(req: Request, res: Response) {
     try {
-      let user: User = req.body;
+      const user: User = req.body;
       user.id = req.params.id as string;
       const data = await this.userService.update(user);
       res.status(200).json(data);

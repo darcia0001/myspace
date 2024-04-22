@@ -11,14 +11,15 @@ export class UserService {
     return users;
   }
   async getById(id: string): Promise<User> {
-    const users: User[] = await this.db.query("SELECT * FROM users where id=?", [
-      id,
-    ]);
+    const users: User[] = await this.db.query(
+      "SELECT * FROM users where id=?",
+      [id]
+    );
     //const user2:User= await  this.db.query(`SELECT * FROM users where id=${id}`);
     //const user3:User= await  this.db.query("SELECT * FROM users where id="+id);
-    if (users.length>0){
-      return users[0]
-    } 
+    if (users.length > 0) {
+      return users[0];
+    }
     return null;
   }
 
@@ -31,11 +32,11 @@ export class UserService {
   }
 
   async create(newUser: User): Promise<User> {
-    const result = await this.db.query(
+    await this.db.query(
       "INSERT INTO users(firstname,lastname,login,password) VALUES (?,?,?,?)",
       [newUser.firstname, newUser.lastname, newUser.login, newUser.password]
     );
-     
+
     //newUser.id = result.lastId;
     return newUser;
   }
@@ -48,7 +49,7 @@ export class UserService {
   async update(user: User): Promise<User> {
     const result = await this.db.query(
       "UPDATE   users   SET  firstname=? , lastname=?   where id = ?",
-      [ user.firstname, user.lastname, user.id]
+      [user.firstname, user.lastname, user.id]
     );
     return result;
   }

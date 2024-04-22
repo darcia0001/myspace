@@ -6,7 +6,7 @@ require('dotenv').config()
 
 // instatiation de l app
 const app = express();
-//config bodyparser
+//config bodyparser *optionel ; express l embarque par defaut
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
