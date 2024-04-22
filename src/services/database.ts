@@ -1,19 +1,17 @@
 import sqlite3 from "sqlite3";
+import { AppDataSource } from "../data-source"
+import { User } from "../models/user";
 
 export class Database {
   db: sqlite3.Database;
   constructor() {
-    this.db = new sqlite3.Database(
-      process.env.SLQLITE_DB || "myspace.db",
-      (err) => {
-        if (err) {
-          console.error("Error opening database", err);
-        } else {
-          console.error(" base de donnee ouverte");
-          this.createTable();
-        }
-      }
-    );
+        AppDataSource.initialize().then(async () => {
+
+                
+            
+                console.log(" Type ORM workds and init well the db.")
+            
+            }).catch(error => console.log(error))
   }
   private createTable() {
     // mignations

@@ -1,3 +1,4 @@
+import { AppDataSource } from "../data-source";
 import { User } from "../models/user";
 import { Database } from "./database";
 export class UserService {
@@ -7,38 +8,36 @@ export class UserService {
   }
 
   async getAll(): Promise<User[]> {
-    const users: User[] = await this.db.query("SELECT * FROM users");
+    const users: User[] = await AppDataSource.manager.find(User);
     return users;
   }
-  async getById(id: string): Promise<User> {
-    const users: User[] = await this.db.query(
-      "SELECT * FROM users where id=?",
-      [id]
-    );
+  async getById(id: number): Promise<User> {
+    const user: User =  await AppDataSource.manager.findOneBy(User,{id:id})
     //const user2:User= await  this.db.query(`SELECT * FROM users where id=${id}`);
     //const user3:User= await  this.db.query("SELECT * FROM users where id="+id);
-    if (users.length > 0) {
-      return users[0];
-    }
-    return null;
+   
+      return user;
+   
   }
 
   async notExist(login: string): Promise<boolean> {
-    const users: User[] = await this.db.query(
-      "SELECT * FROM users where login=?",
-      [login]
-    );
-    return users.length === 0;
+
+    const user= await AppDataSource.manager.findOneBy(User,{
+      login:login
+    })
+    if (user!==undefined){
+      return true
+    }
+    else{
+      return false;
+    } 
   }
 
   async create(newUser: User): Promise<User> {
-    await this.db.query(
-      "INSERT INTO users(firstname,lastname,login,password) VALUES (?,?,?,?)",
-      [newUser.firstname, newUser.lastname, newUser.login, newUser.password]
-    );
+   const result= await AppDataSource.manager.save(newUser)
 
     //newUser.id = result.lastId;
-    return newUser;
+    return result;
   }
   async delete(id: string): Promise<any> {
     const result: any = await this.db.query("DELETE   FROM users where id=?", [
