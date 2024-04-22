@@ -1,0 +1,30 @@
+{
+    "root":true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint"],
+    "extends":[
+        "eslint:recommended", 
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "prettier"
+    ], 
+    "rules": {
+        "no-unused-vars": "error",
+        "no-undef": "error",
+        "prettier/prettier":"error",
+        "@typescript-eslint/naming-convention":[
+            "error",
+            {
+                "selector":"variable", 
+                "format":["camelCase"]
+                
+                //"format":["UPPER_CASE"]
+                //"format":["PascalCase"]
+            }
+        ]
+        
+    },
+    "ignorePatterns":[
+        "node_modules"
+    ]
+}
