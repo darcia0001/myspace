@@ -1,6 +1,8 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
 import { User } from "./models/user"
+import { Message } from "./models/message"
+import { Publication } from "./models/publication"
 
 export const AppDataSource = new DataSource({
     type: "mysql",
@@ -11,7 +13,8 @@ export const AppDataSource = new DataSource({
     database: "edacydb",
     synchronize: true,
     logging: false,
-    entities:[User], //["src/models/*.ts"],
+    
+    entities:[User, Message, Publication], //["src/models/*.ts"],
     migrations: [],
     subscribers: [],
 })

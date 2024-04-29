@@ -1,16 +1,16 @@
 import { AppDataSource } from "../data-source";
-import { Publication } from "../models/publication";
-import { User } from "../models/user";
+import { Message } from "../models/message";
+import { Publication } from "../models/publication"; 
+import { MessageService } from "../services/messageService";
 import { PublicationService } from "../services/publicationService";
-import { UserService } from "../services/UserService2";
-import { Request, Response } from "express";
+ import { Request, Response } from "express";
 
-export class UserController {
-  private userService: UserService;
+export class MessageController {
+  private MessageService: MessageService;
   constructor() {
     AppDataSource.initialize().then(async () => {
 
-      this.userService = new UserService(AppDataSource.getRepository(User));   
+      this.MessageService = new MessageService(AppDataSource.getRepository(Message));   
             
       console.log(" Type ORM workds and init well the db.")
   
@@ -21,7 +21,7 @@ export class UserController {
   async getAll(req: Request, res: Response) {
     try {
       console.log("here>")
-      const list_users = await this.userService.getAll({});
+      const list_users = await this.MessageService.getAll();
       
       console.log("result , call", list_users);
       res.json(list_users);
@@ -32,7 +32,7 @@ export class UserController {
 
   async getById(req: Request, res: Response) {
     try {
-      const user = await this.userService.getById({id:Number(req.params.id)} );
+      const user = await this.MessageService.getById({id:Number(req.params.id)} );
       if (user){
         res.json(user);  
       }else{
@@ -57,7 +57,7 @@ export class UserController {
     } else {
       try {
         console.log("---> search ", login)
-        const UserNotExist = await this.userService.notExist({login:login});
+        const UserNotExist = await this.MessageService.notExist({login:login});
         console.log("UserNotExist",UserNotExist)
         if (UserNotExist) {
           const user: User = new User();
@@ -65,7 +65,7 @@ export class UserController {
           user.lastname=lastname;
           user.login=login;
           user.password=password;
-          const data = await this.userService.create(user);
+          const data = await this.MessageService.create(user);
           res.status(201).json(data);
         } else {
           res.status(400).json({ message: "user already exist " });
@@ -80,7 +80,7 @@ export class UserController {
     try {
       const user: User = req.body;
       user.id = Number(req.params.id)  ;
-      const data = await this.userService.update({id:user.id}, user);
+      const data = await this.MessageService.update({id:user.id}, user);
       res.status(200).json(data);
     } catch (error) {
       res.status(500).json({ message: error.message });
@@ -90,7 +90,7 @@ export class UserController {
   async delete(req: Request, res: Response) {
     try {
       const id = Number(req.params.id);
-      const result = await this.userService.delete(id);
+      const result = await this.MessageService.delete(id);
       res.sendStatus(204);
     } catch (error) {
       res.status(500).json({ message: error.message });

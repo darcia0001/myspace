@@ -1,6 +1,8 @@
 import { AppDataSource } from "../data-source";
 import { User } from "../models/user";
 import { Database } from "./database";
+
+
 export class UserService {
   private db: Database;
   constructor() {
@@ -12,7 +14,7 @@ export class UserService {
     return users;
   }
   async getById(id: number): Promise<User> {
-    const user: User =  await AppDataSource.manager.findOneBy(User,{id:id})
+    const user: User =  await AppDataSource.manager.findOneBy(User,{id:id,firstname:"",lastname:''})
     //const user2:User= await  this.db.query(`SELECT * FROM users where id=${id}`);
     //const user3:User= await  this.db.query("SELECT * FROM users where id="+id);
    
