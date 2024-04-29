@@ -1,9 +1,7 @@
 import { AppDataSource } from "../data-source";
 import { Message } from "../models/message";
-import { Publication } from "../models/publication"; 
-import { MessageService } from "../services/messageService";
-import { PublicationService } from "../services/publicationService";
- import { Request, Response } from "express";
+ import { MessageService } from "../services/messageService";
+  import { Request, Response } from "express";
 
 export class MessageController {
   private MessageService: MessageService;
@@ -21,7 +19,7 @@ export class MessageController {
   async getAll(req: Request, res: Response) {
     try {
       console.log("here>")
-      const list_users = await this.MessageService.getAll();
+      const list_users = await this.MessageService.getAll({});
       
       console.log("result , call", list_users);
       res.json(list_users);
@@ -45,31 +43,28 @@ export class MessageController {
   }
 
   async create(req: Request, res: Response) {
-    console.log("---> create ")
-    const { firstname, lastname, login, password } = req.body;
+    console.log("---> create ",req.body)
+    const { sender, receiver, content, date } = req.body;
     if (
-      firstname === undefined ||
-      lastname === undefined ||
-      login === undefined ||
-      password === undefined
+      sender === undefined ||
+      receiver === undefined ||
+      content === undefined ||
+      date === undefined
     ) {
       res.status(400).json({ message: "body not match contract " });
     } else {
       try {
-        console.log("---> search ", login)
-        const UserNotExist = await this.MessageService.notExist({login:login});
-        console.log("UserNotExist",UserNotExist)
-        if (UserNotExist) {
-          const user: User = new User();
-          user.firstname=firstname;
-          user.lastname=lastname;
-          user.login=login;
-          user.password=password;
-          const data = await this.MessageService.create(user);
+        console.log("---> search ", )
+         
+         
+          const message: Message = new Message();
+          message.sender=sender;
+          message.receiver=receiver;
+          message.content=content;
+          message.date=date;
+          const data = await this.MessageService.create(message);
           res.status(201).json(data);
-        } else {
-          res.status(400).json({ message: "user already exist " });
-        }
+        
       } catch (error) {
         res.status(400).json({ message: error.message });
       }
@@ -78,9 +73,9 @@ export class MessageController {
 
   async update(req: Request, res: Response) {
     try {
-      const user: User = req.body;
-      user.id = Number(req.params.id)  ;
-      const data = await this.MessageService.update({id:user.id}, user);
+      const message: Message = req.body;
+      message.id = Number(req.params.id)  ;
+      const data = await this.MessageService.update({id:message.id}, message);
       res.status(200).json(data);
     } catch (error) {
       res.status(500).json({ message: error.message });

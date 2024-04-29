@@ -2,7 +2,7 @@ import { AppDataSource } from "../data-source";
 import { Publication } from "../models/publication";
 import { User } from "../models/user";
 import { PublicationService } from "../services/publicationService";
-import { UserService } from "../services/UserService2";
+import { UserService } from "../services/UserService";
 import { Request, Response } from "express";
 
 export class UserController {

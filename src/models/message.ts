@@ -13,8 +13,10 @@ export class Message{
     receiver:string;
     
     @Column()
-    conter:string;
+    content:string;
 
-    @Column()
+    @Column(
+        {nullable:true}
+    )
     date:Date;
 } 

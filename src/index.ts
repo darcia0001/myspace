@@ -2,6 +2,7 @@ import "reflect-metadata"
 import { UserRoutes } from "./routers/utilisateurRoute";
 import express from "express";
 import bodyParser from "body-parser";
+import { MessageRoutes } from "./routers/messageRoute";
 require("dotenv").config();
 
 
@@ -12,8 +13,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const userRoutes = new UserRoutes();
+const messageRoutes= new MessageRoutes()
 //brancher mes routes
 app.use("/utilisateurs", userRoutes.router);
+app.use("/messages", messageRoutes.router);
 
 if (false) {
   console.log("hello");

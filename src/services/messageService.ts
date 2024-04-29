@@ -8,7 +8,7 @@ import { Message } from "../models/message";
 export class MessageService  extends AbstractService<Message> {
  
   constructor( repository: Repository<Message>) { 
-    super(AppDataSource.getRepository(Message))
+    super(repository)
   } 
   
 }
