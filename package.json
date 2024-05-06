@@ -2,16 +2,36 @@
   "name": "myspace-api",
   "version": "1.0.0",
   "description": "Myspace app qui permets de faire une inscription des utilisateurs qui vont être  stocker dans une base de données Sqlite(nom , prenom , login , password)",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node index.js"
+    "dev": "nodemon --watch 'src/**/*.ts' --exec  'ts-node' src/index.ts",
+    "lint": "eslint . --fix",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/node": "^20.12.7",
+    "@typescript-eslint/eslint-plugin": "^7.7.1",
+    "@typescript-eslint/parser": "^7.7.1",
     "body-parser": "^1.20.2",
-    "express": "^4.19.2"
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mysql2": "^3.9.7",
+    "reflect-metadata": "^0.2.2",
+    "sqlite3": "^5.1.7",
+    "ts-node": "^10.9.2",
+    "typeorm": "^0.3.20"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.1.1",
+    "@types/express": "^4.17.21",
+    "eslint": "^8.57.0",
+    "globals": "^15.0.0",
+    "nodemon": "^3.1.0",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.7.1"
   }
 }
